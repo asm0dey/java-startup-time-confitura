@@ -16,7 +16,6 @@ colorSchema: "dark"
 
 <img src="/bellsoft.png" width="200px" class="absolute right-10px bottom-5px"/>
 
-
 ---
 layout: image-left
 image: "/pasha.jpeg"
@@ -34,7 +33,6 @@ image: "/pasha.jpeg"
 
 <span><line-md-twitter-x /> asm0di0</span>
 
-
 ---
 layout: image-right
 image: "/members.png"
@@ -51,14 +49,12 @@ Founded in 2017 by Java and Linux experts with 15+ years of experience working a
   - Linux Foundation
   - Cloud Native Computing Foundation
 
-
 ---
 layout: image-right
 image: "/qr.png"
 ---
 
 # About BellSoft
-
 
 - Products:
   - Liberica JDK
@@ -68,7 +64,6 @@ image: "/qr.png"
 <br/>
 Liberica is the JDK officially recommended by <logos-spring-icon />
 
-
 ---
 class: text-center
 layout: cover
@@ -77,10 +72,9 @@ background: /Bg-1.png
 
 # Enough about us :)
 
-## We are here today to tell you a story about...
+## I am here today to tell you a story about...
 
 <v-click><h2>YOU!</h2></v-click>
-
 
 ---
 class: statement
@@ -137,7 +131,6 @@ layout: cover
 
 ## to reduce the startup of their Java application?
 
-
 ---
 class: statement
 layout: cover
@@ -148,7 +141,6 @@ layout: cover
 ---
 
 # Our startup is doing well!
-
 
 - Java 21 LTS
 - Spring Boot 3.4
@@ -164,6 +156,9 @@ public JteModel assistant() {
 }
 ```
 
+---
+
+# Show'em
 
 ---
 
@@ -236,7 +231,6 @@ The longer the start, the slower the rollout
 <b> Maybe it's not too late to migrate to Go? </b>
 </v-clicks>
 
-
 ---
 class: text-center
 ---
@@ -296,9 +290,6 @@ Considerations:
 
 ::right::
 <Youtube id="_oXnnQcD_wc"/>
-
-
-
 
 ---
 
@@ -376,6 +367,7 @@ The Sage
 - Condensers -> optimizations
 
 Considerations:
+
 - Still in the makings
 - The more condensers applied, the bigger the cache
 
@@ -392,7 +384,6 @@ Considerations:
 [JEP 483](https://openjdk.org/jeps/483): Ahead-of-Time Class Loading & Linking (JDK 24)
 
 > Improve startup time by making the classes of an application instantly available, in a loaded and linked state, when the HotSpot Java Virtual Machine starts. Achieve this by monitoring the application during one run and storing the loaded and linked forms of all classes in a cache for use in subsequent runs. Lay a foundation for future improvements to both startup and warmup time.
-
 
 ---
 
@@ -447,7 +438,6 @@ image: /charts/aot-cache-startup.svg
 Let's push it even further and use the builds of premain in Leyden!
 
 <sub>We will be happy to get your feedback on what's broken!</sub>
-
 
 ---
 
@@ -535,7 +525,6 @@ The Explorer
 <div></div>
 Build a fat JAR
 
-
 Build the image:
 
 ```bash
@@ -558,7 +547,6 @@ image: /uni.jpg
 layout: image
 image: /dragon.jpg
 ---
-
 
 ---
 
@@ -845,7 +833,6 @@ layout: cover
 
 </v-click>
 
-
 <v-click at="2">
 
 The image was build, let's run it.
@@ -871,7 +858,6 @@ or Java_jdk_jfr_internal_JVM_isExcluded__Ljava_lang_Class_2]
 ```
 
 ## <v-click at="1">Apparently, when we create a connection to Redis, Spring creates a custom JFR event</v-click>
-
 
 ---
 
@@ -933,7 +919,6 @@ layout: cover
 
 ## Let's move on to building a native image in a Docker container.
 
-
 ---
 
 ```docker {none|1,8|10,16,17} {maxHeight:'200px'}
@@ -978,6 +963,7 @@ Compilation exceeded 300.000000 seconds during CFG traversal
 <br/>
 
 Solution:
+
 - Increase timeout time
 - Build the image on a powerful PC or in the CI
 - <span v-mark.box.green="1"> Plug a laptop into a power socket</span>
@@ -1017,7 +1003,6 @@ Linker command exited with 1
 520.7 Target: aarch64-alpaquita-linux-musl
 520.7 Configured with: /ws/workspace/aq-build-pkg/aports/core/gcc/src/gcc-14.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=aarch64-alpaquita-linux-musl --host=aarch64-alpaquita-linux-musl --target=aarch64-alpaquita-linux-musl --enable-checking=release --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-languages=c,c++,d,objc,go,fortran,ada --enable-link-serialization=2 --enable-linker-build-id --with-arch=armv8-a --with-abi=lp64 --disable-libquadmath --disable-libssp --disable-libsanitizer --disable-cet --enable-gnu-indirect-function=yes --enable-shared --enable-threads --enable-tls --with-bugurl='https:/bell-sw.com/support/' --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpaquita 14.2.0'
 ```
-
 
 ---
 
@@ -1101,7 +1086,6 @@ image: /charts/native-image-startup.svg
 <br/>
 
 The Rebel
-
 
 ---
 
@@ -1370,7 +1354,6 @@ layout: image
 image: /charts/crac.svg
 ---
 
-
 ---
 class: text-center
 layout: cover
@@ -1386,7 +1369,6 @@ image: /Bg-8.png
 # Quick Recap
 
 Which hero are you?
-
 
 🛡 → AppCDS for the smoothest integration <br>
 🧙‍♂️ → Project Leyden EA builds to prepare to use it in the future <br>
