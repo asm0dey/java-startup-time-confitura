@@ -123,6 +123,7 @@ background: /Bg-1.png
 ---
 class: text-center
 layout: cover
+background: /Bg-1.png
 ---
 
 ## Who knows
@@ -385,9 +386,11 @@ Considerations:
 
 > Improve startup time by making the classes of an application instantly available, in a loaded and linked state, when the HotSpot Java Virtual Machine starts. Achieve this by monitoring the application during one run and storing the loaded and linked forms of all classes in a cache for use in subsequent runs. Lay a foundation for future improvements to both startup and warmup time.
 
+[JEP 514](https://openjdk.org/jeps/514): Ahead-of-Time Command-Line Ergonomics (JDK 25)
+
 ---
 
-```docker {1,9|11,16,17|19,23-26|28-31|33,34}{maxHeight:'350px'}
+```docker {1,9|11,16,17|19,23-26|28|30}{maxHeight:'350px'}
 FROM bellsoft/liberica-runtime-container:jdk-24-musl AS builder
 
 ARG project
@@ -415,13 +418,9 @@ COPY --from=optimizer /app/extracted/spring-boot-loader/ ./
 COPY --from=optimizer /app/extracted/snapshot-dependencies/ ./
 COPY --from=optimizer /app/extracted/application/ ./
 
-RUN java -Dspring.aot.enabled=true -XX:AOTMode=record \
-    -XX:AOTConfiguration=app.aotconf -Dspring.context.exit=onRefresh -jar /app/app.jar
-RUN java -Dspring.aot.enabled=true -XX:AOTMode=create \
-    -XX:AOTConfiguration=app.aotconf -XX:AOTCache=app.aot -jar /app/app.jar
+RUN java -XX:AOTCacheOutput=app.aot -Dspring.context.exit=onRefresh -jar /app/app.jar
 
-ENTRYPOINT ["java", "-Dspring.aot.enabled=true", "-XX:AOTCache=app.aot",
- "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-XX:AOTCache=app.aot", "-jar", "/app/app.jar"]
 ```
 
 ---
@@ -437,17 +436,20 @@ image: /charts/aot-cache-startup.svg
 
 Let's push it even further and use the builds of premain in Leyden!
 
-<sub>We will be happy to get your feedback on what's broken!</sub>
-
 ---
 
-```docker {1,2,4|6,10-13,16|18,22-23,26|28,33-37|39,40|42}{maxHeight:'350px'}
-FROM bellsoft/alpaquita-linux-base:glibc AS downloader
-ADD https://is.gd/tZhyPF /java.tar.gz # just a placeholder
-RUN apk add tar
-RUN tar -zxvf java.tar.gz && mv /jdk-24 /java
+```docker {1-3|5|7-9|11|15|21|23|27,28|31|33|37-41|43-46}{maxHeight:'350px'}
+FROM bellsoft/alpaquita-linux-base:glibc AS mycurl
 
-FROM bellsoft/alpaquita-linux-base:glibc AS builder
+RUN apk add curl tar
+
+FROM mycurl AS downloader
+
+RUN curl https://download.java.net/java/early_access/leyden/1/openjdk-26-leydenpremain+1_linux-x64_bin.tar.gz -o /java.tar.gz && \
+    cd / && tar -zxvf java.tar.gz && mv /jdk-24 /java && \
+    rm -f /java.tar.gz
+
+FROM mycurl AS builder
 ARG project
 
 WORKDIR /app
@@ -457,9 +459,9 @@ ADD ${project} /app/${project}
 ENV JAVA_HOME=/java \
     project=${project}
 
-RUN cd ${project} && ./mvnw package
+RUN cd ${project} && ./mvnw -Dmaven.test.skip=true clean package
 
-FROM bellsoft/alpaquita-linux-base:glibc AS optimizer
+FROM mycurl AS optimizer
 ARG project
 
 WORKDIR /app
@@ -469,9 +471,8 @@ ENV project=${project}
 
 RUN /java/bin/java -Djarmode=tools -jar app.jar extract --layers --destination extracted
 
-FROM bellsoft/alpaquita-linux-base:glibc AS runner
+FROM mycurl
 
-RUN apk add curl
 WORKDIR /app
 
 COPY --from=downloader /java /java
