@@ -1,0 +1,26 @@
+{
+  "name": "java-startup-springio",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "build-gha": "slidev build --base /java-startup-time-springio/",
+    "dev": "slidev --open",
+    "export": "slidev export",
+    "export-pdf": "slidev export --with-clicks --format pdf --output dist/index.pdf"
+  },
+  "dependencies": {
+    "@iconify-json/line-md": "^1.2.8",
+    "@iconify-json/logos": "^1.2.4",
+    "@iconify-json/simple-icons": "^1.2.40",
+    "@slidev/cli": "^51.8.2",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "vue": "^3.5.17"
+  },
+  "devDependencies": {
+    "playwright-chromium": "^1.53.1",
+    "prettier": "^3.6.1",
+    "prettier-plugin-slidev": "^1.0.5"
+  }
+}
