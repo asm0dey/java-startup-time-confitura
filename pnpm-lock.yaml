@@ -13,7 +13,7 @@ dependencies:
     version: 1.2.9
   '@iconify-json/simple-icons':
     specifier: ^1.2.52
-    version: 1.2.52
+    version: 1.2.53
   '@slidev/cli':
     specifier: ^52.1.0
     version: 52.2.4(@types/markdown-it@14.1.2)(playwright-chromium@1.55.0)(postcss@8.5.6)
@@ -651,8 +651,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: false
 
-  /@iconify-json/simple-icons@1.2.52:
-    resolution: {integrity: sha512-c41YOMzBhl3hp58WJLxT+Qq3UhBd8GZAMkbS8ddlCuIGLW0COGe2YSfOA2+poA8/bxLhUQODRNjAy3KhiAOtzA==}
+  /@iconify-json/simple-icons@1.2.53:
+    resolution: {integrity: sha512-8GEW5mshsPAZpVAJmkBG/niR2qn8t4U03Wmz6aSD9R4VMZKTECqbOxH3z4inA0JfZOoTvP4qoK9T2VXAx2Xg5g==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false
